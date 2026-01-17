@@ -1,0 +1,21 @@
+# binaries
+tracker
+a.out
+
+# object files
+*.o
+
+# debug files
+*.dSYM
+vgcore.*
+
+# editor junk
+.vscode/
+.idea/
+*.swp
+
+# OS junk
+.DS_Store
+
+# CSV / runtime data (optional)
+entries.csv
