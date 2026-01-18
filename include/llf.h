@@ -1,6 +1,5 @@
 #ifndef LINKED_LIST_FUNCTION_HEADER
 #define LINKED_LIST_FUNCTION_HEADER
-#include "llf.h"
 #include <ctype.h>
 #include <math.h>
 #include <stdbool.h>
