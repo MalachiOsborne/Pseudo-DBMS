@@ -1,5 +1,10 @@
 #ifndef LINKED_LIST_FUNCTION_HEADER
 #define LINKED_LIST_FUNCTION_HEADER
+<<<<<<< HEAD
+=======
+#include "llf.h"
+#include "windows_portability.h"
+>>>>>>> ca9c112038a5b9eaa228c5363f3d93e520b62951
 #include <ctype.h>
 #include <math.h>
 #include <stdbool.h>
@@ -29,7 +34,9 @@ void display_display_list(void);
 void bubble_sort(int a[], int size);
 bool load(const char* csv);
 bool unload(void);
+bool update_csv(const char* csv, node* head);
 bool display_entry_by_id(node* head, int key);
+int display_entry_by_name(node* head, char* name, int entries_ids[]);
 node* create_node(int id[], char name[], char age[],int id_length);
 node* append_node(node* head, int id[], char name[], char age[], int id_length);
 node* insert_after_x(node* head, int key, int id[], char name[], char age[], int id_length);
