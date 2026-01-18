@@ -1,10 +1,7 @@
 #ifndef LINKED_LIST_FUNCTION_HEADER
 #define LINKED_LIST_FUNCTION_HEADER
-<<<<<<< HEAD
-=======
 #include "llf.h"
 #include "windows_portability.h"
->>>>>>> ca9c112038a5b9eaa228c5363f3d93e520b62951
 #include <ctype.h>
 #include <math.h>
 #include <stdbool.h>

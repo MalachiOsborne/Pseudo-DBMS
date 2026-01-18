@@ -571,7 +571,14 @@ void update_options(const char* csv)
                     scanf(" %63[^\n]",new_name);
                     update_name_by_id(headofheads,new_name,name_id);
                 }
-                update_csv(csv,headofheads);
+                if(!update_csv(csv,headofheads))
+                {
+                    printf("Error: Couldn't update .csv file\n");
+                }
+                else
+                {
+                    printf("Data updated successfully\n");
+                }
                 break;
             case 'a':
                 printf("Update by age\n");
