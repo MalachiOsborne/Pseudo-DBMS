@@ -81,20 +81,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
-/*
-int main(void)
-{
-    int id[]={1};
-    int id2[]={2};
-    int id3[]={3};
-    int entr[5];
-    node* head=create_node(id, "abbas","18" ,1);
-    head=append_node(head, id2, "abbas","18" ,1);
-    head=append_node(head, id3, "abbas","18" ,1);
-    display_list(head);
-    printf("\n");
-    int num=display_entry_by_age(head, "18", entr);
-    printf("Entries num %d",num);
-    return 0;
-}
-*/
+

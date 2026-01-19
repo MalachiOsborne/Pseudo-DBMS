@@ -11,6 +11,9 @@
 //saves all the ids in there
 int ids[256];
 int ids_counter=0;
+//i don't need this part for now, this is for the future if i want
+//to expand this dbms to automatically include the header names in
+//the struct
 char* headers[MAX_HEADERS];
 node* headofheads;
 
@@ -245,7 +248,6 @@ void update_options(const char* csv)
                 char old_name[64];
                 char new_name[64];
                 accepted=false;
-                entries_num=0;
                 while(!accepted)
                 {
                     printf("Enter old name (e to exit): ");
@@ -309,7 +311,6 @@ void update_options(const char* csv)
                 char new_age[4];
                 exitted=false;
                 accepted=false;
-                entries_num=0;
                 while(!accepted)
                 {
                     printf("Enter old age(e to exit): ");
@@ -397,6 +398,9 @@ void delete_options(const char* csv)
             }
         }
         int delete_id;
+        bool exitted=false;
+        int entries_num;
+        int entries_ids[ids_counter];
         switch(delete_type)
         {
             case 'i':
@@ -455,8 +459,164 @@ void delete_options(const char* csv)
                 }
                 break;
             case 'n':
+                printf("Delete by name\n");
+                char delete_name[64];
+                exitted=false;
+                accepted=false;
+                while(!accepted)
+                {
+                    printf("Enter name (e to exit): ");
+                    scanf(" %63[^\n]",delete_name);
+                    if(strcasecmp(delete_name,"e")==0)
+                    {
+                        exitted=true;
+                        break;
+                    }
+                    entries_num=display_entry_by_name(headofheads,delete_name,entries_ids);
+                    if(entries_num>0)
+                        accepted=true;
+                }
+                if(!exitted)
+                {
+                    int name_id;
+                    if(entries_num>1)
+                    {
+                        accepted=false;
+                        while(!accepted)
+                        {
+                            printf("Multiple entries with the same name\n");
+                            printf("Please specify which one to change\n");
+                            printf("Enter ID: ");
+                            scanf(" %d",&name_id);
+                            for(int i=0;i<entries_num;i++)
+                            {
+                                if(name_id==entries_ids[i])
+                                {
+                                    accepted=true;
+                                    break;
+                                }
+                            }
+                            if(!accepted)
+                            {
+                                printf("Invalid input\n");
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        name_id=entries_ids[0];
+                    }
+                    while(!accepted)
+                    {
+                        char sure;
+                        printf("Are you sure? Y/n: ");
+                        scanf(" %c",&sure);
+                        sure=tolower(sure);
+                        switch(sure)
+                        {
+                            case 'y':
+                                accepted=true;
+                                break;
+                            case 'n':
+                                delete_id=0;
+                                accepted=true;
+                                break;
+                            default:
+                                printf("Invalid input\n");
+                                break;
+                        }
+                    }
+                    headofheads=delete_node(headofheads,name_id);
+                    if(!update_csv(csv,headofheads))
+                    {
+                        printf("Error: Couldn't update .csv file for deletion\n");
+                    }
+                    else
+                    {
+                        printf("Data deleted successfully\n");
+                    }
+                }
                 break;
             case 'a':
+                printf("Delete by age\n");
+                char delete_age[4];
+                exitted=false;
+                accepted=false;
+                while(!accepted)
+                {
+                    printf("Enter age(e to exit): ");
+                    scanf(" %3s",delete_age);
+                    if(strcasecmp(delete_age,"e")==0)
+                    {
+                        exitted=true;
+                        break;
+                    }
+                    entries_num=display_entry_by_age(headofheads,delete_age,entries_ids);
+                    if(entries_num>0)
+                        accepted=true;
+                }
+                if(!exitted)
+                {
+                    int age_id;
+                    if(entries_num>1)
+                    {
+                        accepted=false;
+                        while(!accepted)
+                        {
+                            printf("Multiple entries with the same age\n");
+                            printf("Please specify which one to change\n");
+                            printf("Enter ID: ");
+                            scanf(" %d",&age_id);
+                            for(int i=0;i<entries_num;i++)
+                            {
+                                if(age_id==entries_ids[i])
+                                {
+                                    accepted=true;
+                                    break;
+                                }
+                            }
+                            if(!accepted)
+                            {
+                                printf("Invalid input\n");
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        age_id=entries_ids[0];
+                    }
+                    while(!accepted)
+                    {
+                        char sure;
+                        printf("Are you sure? Y/n: ");
+                        scanf(" %c",&sure);
+                        sure=tolower(sure);
+                        switch(sure)
+                        {
+                            case 'y':
+                                accepted=true;
+                                break;
+                            case 'n':
+                                delete_id=0;
+                                accepted=true;
+                                break;
+                            default:
+                                printf("Invalid input\n");
+                                break;
+                        }
+                    }
+                    headofheads=delete_node(headofheads,age_id);
+                    if(!update_csv(csv,headofheads))
+                    {
+                        printf("Error: Couldn't update .csv file for deletion\n");
+                    }
+                    else
+                    {
+                        printf("Data deleted successfully\n");
+                    }
+                }
                 break;
             case 'e':
                 done=true;

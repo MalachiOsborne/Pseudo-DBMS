@@ -107,6 +107,15 @@ node* update_id(node* head, int old_id, int new_id)
         }
         ptr=ptr->next;
     }
+    //forgot to update the ids array
+    for (int i=0;i<ids_counter;i++)
+    {
+        if (ids[i]==old_id)
+        {
+            ids[i]=new_id;
+            break;
+        }
+    }
     return head;
 }
 
@@ -346,9 +355,9 @@ int generate_id(void)
 {
     if(ids_counter==0||ids[0]!=1)
         return 1;
+    bubble_sort(ids,ids_counter);
     for(int i=0;i<ids_counter;i++)
     {
-        bubble_sort(ids,ids_counter);
         if(ids[i+1]!=ids[i]+1)
             return ids[i]+1;
     }
