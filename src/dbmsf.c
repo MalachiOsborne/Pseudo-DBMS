@@ -507,6 +507,7 @@ void delete_options(const char* csv)
                     {
                         name_id=entries_ids[0];
                     }
+                    accepted=false;
                     while(!accepted)
                     {
                         char sure;
@@ -587,6 +588,7 @@ void delete_options(const char* csv)
                     {
                         age_id=entries_ids[0];
                     }
+                    accepted=false;
                     while(!accepted)
                     {
                         char sure;
