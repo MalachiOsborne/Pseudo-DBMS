@@ -43,3 +43,10 @@ This function was very important in keeping the id count low. Because deletion o
 
 ## `dbmsf.c`
 
+### Macros
+Most of the macros are used to `#include` libraries necessary to perform the tasks the project demands. The most glaring macro is the `#define` one. This is a super interesting C property that I used to replicate a default argument in C++.
+
+### Global variables
+There are 4 global variables: `ids` int array to store the ids in the linked list, `ids_counter` to store the number of ids, `headers` char* array which is currently unused, but the purpose was to use it in the linked list struct to have as many headers as there were in any permutation; however, I wasn't able to implement it due to it being so early in the project that I didn't even implement the load function yet, and I didn't want to get stuck on an unnecessarily complicated task. For the most important global variable: `headsofheads`. `headofheads` is where the linked list structure lives that gives rise to everything in the project. The name comes from a naming collision in a function since I named a parameter "head" and the original global variable also "head". This sparked the idea that the global variable is the "head" of all the other (temporary) heads. Finally, `loaded` global bool variable is used to determine whether the .csv file was fully loaded or not in the `unload` function. 
+
+### Search Options
